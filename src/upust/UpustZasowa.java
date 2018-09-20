@@ -13,6 +13,11 @@ public class UpustZasowa extends AbstractUpust{
     }
 
     public double flowArea() {
-        return (width - width*position.getPositioninPrecentage())* height;
+        return (width - width*(position.getPositioninPrecentage()/100))* height;
+    }
+
+    public void setMechanismPositionByFlowValue(double flowToBeSet, double waterLevel){
+        double positionToSet = (-flowToBeSet/speedOfFlow(this.averageDepth(waterLevel)))*(1/height)+width;
+        position = new MechanismPosition(positionToSet);
     }
 }

@@ -40,5 +40,7 @@ public abstract class AbstractZbiornik implements Zbiornik {
         return Math.pow(waterLevel, 2)*length/approximatedCurveOfTank;
     }
 
+    public abstract double calculateFlowRatio();
+
 
 }

@@ -47,4 +47,6 @@ public abstract class AbstractTama implements Zapora {
         return upustList.stream().mapToDouble(u -> u.calculateOutflow(waterLevel)).sum();
     }
 
+
+
 }

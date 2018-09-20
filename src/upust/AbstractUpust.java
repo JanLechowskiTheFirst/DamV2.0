@@ -59,6 +59,8 @@ public abstract class AbstractUpust implements Upust{
 
     public abstract double flowArea();
 
+    public abstract void setMechanismPositionByFlowValue(double flowToBeSet, double waterLevel);
+
     public double speedOfFlow(double depth){
         return Math.sqrt(2*depth*10); //gravity acceleration  ~ 10 m/s^2
     }

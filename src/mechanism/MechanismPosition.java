@@ -10,13 +10,13 @@ public class MechanismPosition {
 
     public void calculatePositionPercentage(double positionInPrecentage){
         if(positionInPrecentage>=0 && positionInPrecentage<=100){
-            this.positionInPercentage =positionInPrecentage;
+            positionInPercentage =positionInPrecentage;
         }
         else if(positionInPrecentage<0){
-            this.positionInPercentage = 0;
+            positionInPercentage = 0;
         }
         else if(positionInPrecentage > 100){
-            this.positionInPercentage =100;
+            positionInPercentage =100;
         }
     }
 
@@ -25,7 +25,7 @@ public class MechanismPosition {
     }
 
     public double getPositioninPrecentage() {
-        return positionInPercentage /100;
+        return positionInPercentage;
     }
 }
 

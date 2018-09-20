@@ -2,7 +2,6 @@ package tama;
 
 import sterownik.AbstractSterownikTamy;
 import upust.AbstractUpust;
-
 import java.util.List;
 import java.util.Map;
 
@@ -11,12 +10,22 @@ public abstract class AbstractTama implements Zapora {
     List<AbstractUpust> upustList;
     AbstractSterownikTamy sterownik;
     Map<LevelType, Double> damRelatedWaterLevels;
+    double heightOfTama;
 
 
-    public AbstractTama(List<AbstractUpust> upustList, AbstractSterownikTamy sterownik, Map<LevelType, Double> damRelatedWaterLevels) {
+    public AbstractTama(List<AbstractUpust> upustList, AbstractSterownikTamy sterownik, Map<LevelType, Double> damRelatedWaterLevels, double hightOfTama) {
         this.upustList = upustList;
         this.sterownik = sterownik;
         this.damRelatedWaterLevels=damRelatedWaterLevels;
+        this.heightOfTama =hightOfTama;
+    }
+
+    public double getHeightOfTama() {
+        return heightOfTama;
+    }
+
+    public void setHeightOfTama(double heightOfTama) {
+        this.heightOfTama = heightOfTama;
     }
 
     public List<AbstractUpust> getUpustList() {

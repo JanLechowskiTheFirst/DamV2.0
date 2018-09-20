@@ -2,7 +2,6 @@ package sterownik;
 
 import tama.LevelType;
 import upust.AbstractUpust;
-
 import java.util.List;
 import java.util.Map;
 

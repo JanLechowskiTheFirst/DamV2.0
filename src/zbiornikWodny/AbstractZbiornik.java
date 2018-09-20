@@ -5,11 +5,13 @@ public abstract class AbstractZbiornik implements Zbiornik {
     double approximatedCurveOfTank;
     double length;
     double waterLevel;
+    int timeBase; //timeBase -> timebase x realTime, timebase = 10 -> time=timex10
 
-    AbstractZbiornik(double approximatedCurveOfTank, double length, double waterLevel) {
+    AbstractZbiornik(double approximatedCurveOfTank, double length, double waterLevel, int timeBase) {
         this.approximatedCurveOfTank = approximatedCurveOfTank;
         this.length = length;
         this.waterLevel = waterLevel;
+        this.timeBase=timeBase;
     }
 
     public double getApproximatedCurveOfTank() {

@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class Tama extends AbstractTama{
 
-    public Tama(List<AbstractUpust> upustList, AbstractSterownikTamy sterownik,     Map<LevelType, Double> damRelatedWaterLevels) {
-        super(upustList, sterownik, damRelatedWaterLevels);
+    public Tama(List<AbstractUpust> upustList, AbstractSterownikTamy sterownik, Map<LevelType, Double> damRelatedWaterLevels, double heightOfTama) {
+        super(upustList, sterownik, damRelatedWaterLevels, heightOfTama);
     }
 }

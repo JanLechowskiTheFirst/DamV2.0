@@ -8,6 +8,7 @@ public abstract class AbstractUpust implements Upust{
     double height;
     double width;
     double distanceFromTheLakeBottomToTheBottomOfTheUpust;
+    private long lastTime;
 
     AbstractUpust(MechanismPosition position, double height, double width, double distanceFromTheLakeBottomToTheBottomOfTheUpust) {
         this.position = position;
@@ -49,10 +50,18 @@ public abstract class AbstractUpust implements Upust{
         this.distanceFromTheLakeBottomToTheBottomOfTheUpust = distanceFromTheLakeBottomToTheBottomOfTheUpust;
     }
 
-
+    //measure exection time, return outflow/execTime
     public double calculateOutflow(double waterLevel) {
+        long time = System.nanoTime();
+        if(lastTime == 0) {
+            lastTime = time;
+            return 0;
+        }
+        double executionTime = time - lastTime;
+        lastTime = time;
+
         double depth = averageDepth(waterLevel);
-        return speedOfFlow(depth)*flowArea();
+        return speedOfFlow(depth)*flowArea()/executionTime;
     }
 
     public abstract double averageDepth(double waterLevel);

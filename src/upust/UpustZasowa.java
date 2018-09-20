@@ -9,15 +9,15 @@ public class UpustZasowa extends AbstractUpust{
     }
 
     public double averageDepth(double waterLevel) {
-        return Math.max(0, waterLevel - distanceFromTheLakeBottomToTheBottomOfTheUpust + (height/2));
+        return Math.max(0, waterLevel - distanceFromTheLakeBottomToTheBottomOfTheUpust - (height/2));
     }
 
     public double flowArea() {
-        return (width - width*(position.getPositioninPrecentage()/100))* height;
+        return (width - width*(position.getPositionInPercentage()/100))* height;
     }
 
     public void setMechanismPositionByFlowValue(double flowToBeSet, double waterLevel){
-        double positionToSet = (-flowToBeSet/speedOfFlow(this.averageDepth(waterLevel)))*(1/height)+width;
+        double positionToSet = (-flowToBeSet/speedOfFlow(averageDepth(waterLevel)))*(1/height)+width;
         position = new MechanismPosition(positionToSet);
     }
 }

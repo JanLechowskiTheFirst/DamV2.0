@@ -24,7 +24,7 @@ public class MechanismPosition {
         calculatePositionPercentage(positionInPrecentage);
     }
 
-    public double getPositioninPrecentage() {
+    public double getPositionInPercentage() {
         return positionInPercentage;
     }
 }

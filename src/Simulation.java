@@ -33,14 +33,14 @@ public class Simulation {
         AbstractSterownikTamy sterownik = new Sterownik(upusty, mapaPoziomow);
         AbstractTama tama = new Tama(upusty, sterownik, mapaPoziomow, 30);
 
-        AbstractZbiornik zbiornik = new Zalew(0.2, 20,10, tama, 600, 100000);
+        AbstractZbiornik zbiornik = new Zalew(0.2, 20,10, tama, 600, 10000);
 
         int i =0;
         System.out.println("START!");
         while(i<1000) {
             System.out.println(i);
             zbiornik.setWaterLevel(zbiornik.calculateNewWaterLevel(zbiornik.calculateFlowRatio()));
-            ((Zalew) zbiornik).getTama().getSterownik().control(zbiornik.getWaterLevel());
+            ((Zalew) zbiornik).getTama().getSterownik().control(zbiornik.getWaterLevel(), ((Zalew) zbiornik).getInflow());
             i++;
             System.out.println("Poziom wody " + zbiornik.getWaterLevel());
             System.out.println("Upust 1 " + ((Zalew) zbiornik).getTama().getUpustList().get(0).getPosition().getPositionInPercentage());

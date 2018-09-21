@@ -21,34 +21,27 @@ public abstract class AbstractSterownikTamy implements SterownikTamy {
         this.damRelatedWaterLevels=damRelatedWaterLevels;
     }
 
-    public void control(double waterLevel) {
+    public void control(double waterLevel, double inflow) {
         List<AbstractUpust> upustyZasowy = upustList.stream().filter(u -> u instanceof UpustZasowa).collect(Collectors.toList());
         List<AbstractUpust> upustyKlapy = upustList.stream().filter(u -> u instanceof UpustKlapaPionowa).collect(Collectors.toList());
         double waterLevelChangeFromLastMeasurement = waterLevel - lastMeasuredWaterLevel;
 
         if(waterLevel <= damRelatedWaterLevels.get(LevelType.DEFAULT)){
             upustyKlapy.stream().forEach(u -> u.setPosition(new MechanismPosition(100)));
-            upustyZasowy.stream().forEach(u -> u.setMechanismPositionByFlowValue(5, waterLevel));
+            upustyZasowy.stream().forEach(u -> u.setMechanismPositionByFlowValue(5, waterLevel)); //minimum flow to sustain the life below dam is 9.5 m3/s
         }
-        else if(waterLevel > damRelatedWaterLevels.get(LevelType.DEFAULT) && waterLevel <= damRelatedWaterLevels.get(LevelType.HAZARDOUS ) && waterLevelChangeFromLastMeasurement>0){
-            upustyKlapy.stream().forEach(u -> u.setMechanismPositionByFlowValue(100, waterLevel));
-            upustyZasowy.stream().forEach(u -> u.setMechanismPositionByFlowValue(1000, waterLevel));
+        else if(waterLevel > damRelatedWaterLevels.get(LevelType.DEFAULT) && waterLevel <= damRelatedWaterLevels.get(LevelType.HAZARDOUS ) && waterLevelChangeFromLastMeasurement < 0){
+            upustyKlapy.stream().forEach(u -> u.setPosition(new MechanismPosition(100)));
+            upustyZasowy.stream().forEach(u -> u.setMechanismPositionByFlowValue(inflow/2, waterLevel));
         }
-        else if(waterLevel > damRelatedWaterLevels.get(LevelType.DEFAULT) && waterLevel <= damRelatedWaterLevels.get(LevelType.HAZARDOUS ) && waterLevelChangeFromLastMeasurement<0){
-            upustyKlapy.stream().forEach(u -> u.setMechanismPositionByFlowValue(50, waterLevel));
-            upustyZasowy.stream().forEach(u -> u.setMechanismPositionByFlowValue(1000, waterLevel));
+        else if(waterLevel > damRelatedWaterLevels.get(LevelType.DEFAULT) && waterLevel <= damRelatedWaterLevels.get(LevelType.HAZARDOUS ) && waterLevelChangeFromLastMeasurement > 0){
+            upustyKlapy.stream().forEach(u -> u.setMechanismPositionByFlowValue(inflow/2, waterLevel));
+            upustyZasowy.stream().forEach(u -> u.setPosition(new MechanismPosition(0)));
         }
-        else if(waterLevel > damRelatedWaterLevels.get(LevelType.DEFAULT) && waterLevel <= damRelatedWaterLevels.get(LevelType.HAZARDOUS ) && waterLevelChangeFromLastMeasurement<0){
-            upustyKlapy.stream().forEach(u -> u.setMechanismPositionByFlowValue(50, waterLevel));
-            upustyZasowy.stream().forEach(u -> u.setMechanismPositionByFlowValue(1000, waterLevel));
-        }
-        else if(waterLevel > damRelatedWaterLevels.get(LevelType.HAZARDOUS) && waterLevel <= damRelatedWaterLevels.get(LevelType.DESTRUCTIVE )){
-            upustyKlapy.stream().forEach(u -> u.setMechanismPositionByFlowValue(200, waterLevel));
-            upustyZasowy.stream().forEach(u -> u.setMechanismPositionByFlowValue(1000, waterLevel));
-        }
-        else{
-            upustyKlapy.stream().forEach(u -> u.setMechanismPositionByFlowValue(1000, waterLevel));
-            upustyZasowy.stream().forEach(u -> u.setMechanismPositionByFlowValue(1000, waterLevel));
+        else if(waterLevel > damRelatedWaterLevels.get(LevelType.HAZARDOUS)){
+            upustyKlapy.stream().forEach(u -> u.setPosition(new MechanismPosition(0)));
+            upustyZasowy.stream().forEach(u -> u.setPosition(new MechanismPosition(0)));
+
         }
 
             lastMeasuredWaterLevel=waterLevel;

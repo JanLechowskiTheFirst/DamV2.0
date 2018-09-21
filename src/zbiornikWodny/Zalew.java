@@ -6,7 +6,6 @@ public class Zalew extends AbstractZbiornik {
 
     private double inflow;
     private AbstractTama tama;
-    private long lastTime;
 
     public Zalew(double approximatedCurveOfTank, double length, double initialWaterLevel, AbstractTama tama, double inflow, int timeBase) {
         super(approximatedCurveOfTank, length, initialWaterLevel, timeBase);
@@ -33,20 +32,12 @@ public class Zalew extends AbstractZbiornik {
 
     public double calculateNewWaterLevel(double flowRatio) {
         double currentVolume = calculateVolume();
-        double newVolume = currentVolume+flowRatio;
+        double newVolume = Math.max(0, currentVolume+flowRatio);
         return Math.min(tama.getHeightOfTama() , Math.sqrt(newVolume*approximatedCurveOfTank/length));
     }
 
-
     public double calculateFlowRatio(){
-        long time = System.nanoTime();
-        if(lastTime == 0) {
-            lastTime = time;
-            return 0;
-        }
-        double executionTime = time - lastTime;
-        lastTime = time;
         double outflow = tama.calculateTotalOutFlow(waterLevel);
-        return timeBase*((inflow/executionTime)-outflow);
+        return timeBase*(inflow-outflow);
     }
 }

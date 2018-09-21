@@ -2,6 +2,10 @@ package upust;
 
 import mechanism.MechanismPosition;
 
+/**
+ * UpustKlapaPionowa should be placed at the very top of the dam
+ */
+
 public class UpustKlapaPionowa extends AbstractUpust{
 
     public UpustKlapaPionowa(MechanismPosition position, double height, double width, double distanceFromTheLakeBottomToTheBottomOfTheUpust){

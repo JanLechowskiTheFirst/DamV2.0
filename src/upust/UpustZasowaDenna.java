@@ -2,14 +2,18 @@ package upust;
 
 import mechanism.MechanismPosition;
 
-public class UpustZasowa extends AbstractUpust{
+/**
+ * UpustZasowaDenna should be placed on the very bottom of the dam
+ */
 
-    public UpustZasowa(MechanismPosition position, double height, double width, double distanceFromTheLakeBottomToTheBottomOfTheUpust){
+public class UpustZasowaDenna extends AbstractUpust{
+
+    public UpustZasowaDenna(MechanismPosition position, double height, double width, double distanceFromTheLakeBottomToTheBottomOfTheUpust){
         super(position, height, width, distanceFromTheLakeBottomToTheBottomOfTheUpust);
     }
 
     public double averageDepth(double waterLevel) {
-        return Math.max(0, waterLevel - distanceFromTheLakeBottomToTheBottomOfTheUpust - (height/2));
+        return waterLevel > height/2 ? Math.max(0, waterLevel - distanceFromTheLakeBottomToTheBottomOfTheUpust - (height/2)) : waterLevel/2;
     }
 
     public double flowArea() {

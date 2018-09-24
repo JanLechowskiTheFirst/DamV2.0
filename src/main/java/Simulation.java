@@ -36,14 +36,14 @@ public class Simulation {
         List<AbstractUpust> upusty = new ArrayList<>();
         Map<LevelType, Double> mapaPoziomow = new HashMap<>();
         AbstractZbiornik zbiornik = new Zalew();
-//        int j =0;
+        int j =0;
 
         try{
             upusty.addAll(UtilYAML.loadUpustKlapaPionowa());
             upusty.addAll(UtilYAML.loadUpustZasowaDenna());
             mapaPoziomow = UtilYAML.loadMapaPoziomow();
             zbiornik = UtilYAML.loadZalew();
-//            j=UtilYAML.loadCalculationNumber();
+            j=UtilYAML.loadCalculationNumber();
 
         }
         catch(FileNotFoundException e){
@@ -57,7 +57,7 @@ public class Simulation {
 
         int i =0;
         logger.info("START!");
-        while(i<1500) { //i<j TODO
+        while(i<j) {
 
             zbiornik.setWaterLevel(zbiornik.calculateNewWaterLevel(zbiornik.calculateFlowRatio()));
             ((Zalew) zbiornik).getTama().getSterownik().control(zbiornik.getWaterLevel());

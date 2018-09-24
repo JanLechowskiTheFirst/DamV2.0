@@ -5,7 +5,6 @@ import tama.LevelType;
 import upust.AbstractUpust;
 import upust.UpustKlapaPionowa;
 import upust.UpustZasowaDenna;
-
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;

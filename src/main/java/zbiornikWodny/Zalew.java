@@ -7,11 +7,20 @@ public class Zalew extends AbstractZbiornik {
     private double inflow;
     private AbstractTama tama;
 
+    public Zalew(){
+
+    }
+
     public Zalew(double approximatedCurveOfTank, double length, double initialWaterLevel, AbstractTama tama, double inflow, int timeBase) {
         super(approximatedCurveOfTank, length, initialWaterLevel, timeBase);
         this.tama=tama;
         this.inflow=inflow;
 
+    }
+
+    public Zalew(double approximatedCurveOfTank, double length, double initialWaterLevel, double inflow, int timeBase) {
+        super(approximatedCurveOfTank, length, initialWaterLevel, timeBase);
+        this.inflow = inflow;
     }
 
     public double getInflow() {

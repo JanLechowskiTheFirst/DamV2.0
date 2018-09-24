@@ -1,7 +1,6 @@
 package upust;
 
 
-@FunctionalInterface
 public interface Upust {
 
     /**

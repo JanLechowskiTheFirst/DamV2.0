@@ -1,0 +1,4 @@
+---
+  !!tama.LevelType 'DEFAULT': 10.0
+  !!tama.LevelType 'HAZARDOUS': 27.4
+  !!tama.LevelType 'DESTRUCTIVE': 30.0
